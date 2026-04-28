@@ -26,19 +26,35 @@ app.whenReady().then(() => {
   nativeTheme.themeSource = 'dark'  // 强制深色，标题栏也变黑
   createWindow()
   ipcMain.handle('ping', () => 'pong')
+
+  // 缓存 GPU 信息（si.graphics 在 Windows 上会启动 PowerShell，开销极大）
+  let gpuCache = { usage: null, model: '' }
+  let gpuLastFetch = 0
+  async function getGpu() {
+    const now = Date.now()
+    // 每 30 秒才刷新一次 GPU
+    if (now - gpuLastFetch < 30000) return gpuCache
+    gpuLastFetch = now
+    try {
+      const g = await si.graphics()
+      const c = g.controllers[0]
+      gpuCache = { usage: c?.utilizationGpu ?? null, model: c?.model ?? '' }
+    } catch {}
+    return gpuCache
+  }
+
   ipcMain.handle('get-stats', async () => {
-    const [cpu, mem, gpuData, net] = await Promise.all([
+    const [cpu, mem, gpu, net] = await Promise.all([
       si.currentLoad(),
       si.mem(),
-      si.graphics(),
+      getGpu(),
       si.networkStats(),
     ])
-    const gpu = gpuData.controllers[0]
     const netTotal = net.reduce((s, n) => s + n.rx_sec + n.tx_sec, 0)
     return {
       cpu: Math.round(cpu.currentLoad),
       mem: { used: mem.active, total: mem.total },
-      gpu: { usage: gpu?.utilizationGpu ?? null, model: gpu?.model ?? '' },
+      gpu,
       net: netTotal,
     }
   })

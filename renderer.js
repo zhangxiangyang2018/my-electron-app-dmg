@@ -57,4 +57,4 @@ async function updateStats() {
 }
 
 updateStats()
-setInterval(updateStats, 2000)
+setInterval(updateStats, 3000)
