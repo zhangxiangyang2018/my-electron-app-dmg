@@ -23,7 +23,7 @@ jobs:
         env:
           # 不签名（无 Apple 开发者证书）
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-        run: npx electron-builder --mac --x64 --arm64
+        run: npx electron-builder --mac --x64 --arm64 --publish never
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -48,7 +48,7 @@ jobs:
       - run: npm ci
 
       - name: Build Windows
-        run: npx electron-builder --win
+        run: npx electron-builder --win --publish never
 
       - uses: actions/upload-artifact@v4
         with:
