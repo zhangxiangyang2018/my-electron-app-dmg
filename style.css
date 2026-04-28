@@ -1,0 +1,95 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0e0e0e;
+  color: #ffffff;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+#app {
+  display: flex;
+  flex: 1;
+  gap: 16px;
+  padding: 20px;
+}
+
+.panel {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#resource-panel { flex: 1; }
+#log-panel { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+.panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.resource-list { display: flex; flex-direction: column; gap: 20px; }
+
+.res-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.res-label { font-size: 0.85rem; font-weight: 500; }
+.res-val   { font-size: 0.85rem; font-weight: 700; }
+
+.cpu-color { color: #a78bfa; }
+.gpu-color { color: #34d399; }
+.mem-color { color: #fb923c; }
+.net-color { color: #38bdf8; }
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
+
+.cpu-fill { background: #a78bfa; }
+.gpu-fill { background: #34d399; }
+.mem-fill { background: #fb923c; }
+.net-fill { background: #38bdf8; }
+
+#log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.log-entry {
+  background: #111111;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  font-family: 'Consolas', monospace;
+  color: #aaaaaa;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.log-time { color: #555; }
+.log-level { color: #34d399; }
+

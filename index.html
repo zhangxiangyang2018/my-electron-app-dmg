@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'" />
+    <title>My Electron App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 左栏 -->
+      <div class="panel" id="resource-panel">
+        <div class="panel-title">资源</div>
+        <div class="resource-list">
+          <div class="res-item">
+            <div class="res-header">
+              <span class="res-label cpu-color">CPU</span>
+              <span class="res-val" id="cpu-val">-</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill cpu-fill" id="cpu-bar"></div></div>
+          </div>
+          <div class="res-item">
+            <div class="res-header">
+              <span class="res-label gpu-color">GPU</span>
+              <span class="res-val" id="gpu-val">-</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill gpu-fill" id="gpu-bar"></div></div>
+          </div>
+          <div class="res-item">
+            <div class="res-header">
+              <span class="res-label mem-color">内存</span>
+              <span class="res-val" id="mem-val">-</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill mem-fill" id="mem-bar"></div></div>
+          </div>
+          <div class="res-item">
+            <div class="res-header">
+              <span class="res-label net-color">带宽</span>
+              <span class="res-val" id="net-val">-</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill net-fill" id="net-bar"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- 右栏 -->
+      <div class="panel" id="log-panel">
+        <div class="panel-title">运行日志</div>
+        <div id="log-list"></div>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
